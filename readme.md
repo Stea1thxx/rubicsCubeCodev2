@@ -4,6 +4,7 @@
 
 https://learnopencv.com/color-spaces-in-opencv-cpp-python/   
 https://pysource.com/2021/10/19/simple-color-recognition-with-opencv-and-python/   
+https://www.tutorialspoint.com/opencv-python-how-to-display-the-coordinates-of-points-clicked-on-an-image
 
 #### Other stuff:
 
