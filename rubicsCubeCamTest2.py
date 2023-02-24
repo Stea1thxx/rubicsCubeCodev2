@@ -13,12 +13,11 @@ class CubeTemplateDimensions:
   def __init__(self, Image, Size, matrixType, StartPointCoordinates):
     self.Image = Image
     self.Size = Size
-
     self.matrixType = matrixType
     self.StartPointCoordinates = StartPointCoordinates
 
 #TODO: Object defs
-cubeTemp = CubeTemplateDimensions(np.zeros((400,640)),180,3,(100,60))
+cubeTemp = CubeTemplateDimensions(np.zeros((400,640)),180,4,(100,60))
 cubeTemp.Image = np.zeros((400,640)) #np.zeros((400,640)) -  #Creates a 400 by 640 matrix
 cubeTemp.Size = 240 #180
 cubeTemp.matrixType = 3 #3
