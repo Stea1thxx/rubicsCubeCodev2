@@ -32,8 +32,8 @@ cv2.setMouseCallback('Point Coordinates', click_event)
 while True:
    _, frame = cap.read()
    cv2.imshow('Point Coordinates',frame)
-   k = cv2.waitKey(1) & 0xFF
-   if k == 27:
+   k = cv2.waitKey(1) & 0xFF 
+   if k == ord("q"):
       break
    
 cap.release()

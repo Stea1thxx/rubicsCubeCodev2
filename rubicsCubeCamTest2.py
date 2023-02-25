@@ -18,13 +18,12 @@ class CubeTemplateDimensions:
 
 #TODO: Object defs
 cubeTemp = CubeTemplateDimensions(np.zeros((400,640)),180,4,(100,60))
-cubeTemp.Image = np.zeros((400,640)) #np.zeros((400,640)) -  #Creates a 400 by 640 matrix
+cubeTemp.Image = np.zeros((720,1280)) #np.zeros((400,640)) -  #Creates a 400 by 640 matrix
 cubeTemp.Size = 240 #180
 cubeTemp.matrixType = 3 #3
+cubeDimenstions = int(cubeTemp.Size/3)
 
 #cubeTemp.StartPointCoordinates = (int(1280/2)-int(cubeTemp.Size/2), int(720/2)-int(cubeTemp.Size/2)) #(100,60)
-
-cubeDimenstions = int(cubeTemp.Size/3)
 
 def drawCube(img, cubeSize, cubeMatrix, start_point): # start_poing (100, 60)
     cubecell = int(cubeSize / cubeMatrix)
@@ -66,38 +65,45 @@ while True:
     pixel_center = hsv_frame[cy, cx] #The Hue Saturation and Visibility value at point of the circle
     cv2.waitKey(10)
     hue_value = pixel_center[0]
-    xMiddle = (cubeTemp.StartPointCoordinates[0] + int(cubeDimenstions/2))
-    yMiddle = (cubeTemp.StartPointCoordinates[1] + int(cubeDimenstions/2))    
+    xMiddle = (cubeTemp.StartPointCoordinates[0])
+    yMiddle = (cubeTemp.StartPointCoordinates[1])
 
-    if cv2.waitKey(1) == ord("c"):
+
+    '''xMiddle = (cubeTemp.StartPointCoordinates[0] + int(cubeDimenstions/2))
+    yMiddle = (cubeTemp.StartPointCoordinates[1] + int(cubeDimenstions/2))   '''
+
+    
+    keyPress = cv2.waitKey(20) 
+    if keyPress & 0xFF == ord("c"):
         for y in range(yMiddle,yMiddle + (3*cubeDimenstions), cubeDimenstions):
             for x in range(xMiddle,xMiddle + (3*cubeDimenstions), cubeDimenstions):
                 hsv_square = cv2.mean(hsv_frame[y:y+cubeDimenstions, x:x+cubeDimenstions])[0] #Finding the mean of the HSV Values in the blocks
                 hue_value = hsv_square
-
-                
                 
                 color = "Undefined"
-                
-                if hue_value < 11:
+                if hue_value < 3:
+                    color = "F"
+                elif hue_value < 13:
                     color = "B" #Orange
-                elif hue_value < 33:
+                elif hue_value < 20:
                     color = "U" #Yellow
-                elif hue_value < 78:
+                elif hue_value < 85:
                     color = "R" #Green
-                elif hue_value < 131:
+                elif hue_value < 105:
                     color = "L" #Blue
-                elif hue_value < 180:
-                    color = "F" #Red
                 else:
                     color = "D" #White
                 colorString += color
+
+                print(hue_value)
+
         colorString += ","
         print(colorString)
 
-    cv2.imshow("Frame", frame) #To convert to an HSV frame use "hsv_frame"
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+
+    elif keyPress & 0xFF == ord('q'):
         break
+    cv2.imshow("Frame", frame) #To convert to an HSV frame use "hsv_frame"
 
 cap.release()
 cv2.destroyAllWindows()
