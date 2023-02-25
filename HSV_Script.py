@@ -5,7 +5,7 @@ def nothing(x):
     pass
 
 # Load image
-image = cv2.imread('imgs\img2.jpg')
+image = cv2.imread('imgs\img7.jpg')
 
 print('Original Dimensions : ',image.shape)
  
